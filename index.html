@@ -9,6 +9,8 @@
   <h1>Мой Архив</h1>
   <div id="file-list"></div>
 
+  <audio id="click-sound" src="click.mp3" preload="auto"></audio>
+
   <script>
     fetch('data.json')
       .then(res => res.json())
@@ -24,7 +26,7 @@
               <img src="${file.icon}" width="20" style="vertical-align: middle; margin-right: 5px;">
               ${file.host}
             </p>
-            <a href="${file.url}" target="_blank">Скачать</a>
+            <a href="${file.url}" target="_blank" onclick="document.getElementById('click-sound').play()">Скачать</a>
           `;
           list.appendChild(div);
         });
