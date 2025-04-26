@@ -19,5 +19,26 @@
     "host": "Google Drive",
     "url": "https://drive.google.com/file/d/1ZzYqZ-rBcb7fNSI4KIH8-Bwzj68nHsjW/view?usp=drive_link",
     "icon": "icons/google-drive.png"
+  },
+  {
+    "name": "Adobe After Effects 2019 + плагины",
+    "size": "5.15 GB",
+    "host": "MEGA",
+    "url": "https://mega.nz/file/M3YFASTA#mL8QFfTnR8uO2tu2vIdRAssrbgIXDDpfWiOkLtGfx6g",
+    "icon": "icons/mega.png"
+  },
+   {
+    "name": "KMS AUTO Активация винды",
+    "size": "20 MB",
+    "host": "MEGA",
+    "url": "https://mega.nz/file/RvYQTRxA#soJraNuZP4G-Vqqkxj5PIh35e1YUs6ovnJ1MfBebJCA",
+    "icon": "icons/mega.png"
+  },
+  {
+    "name": "Универсальный ISO образ с windows 10 по windows XP",
+    "size": "15.88 GB",
+    "host": "MEGA",
+    "url": "https://mega.nz/file/d69SABiL#57agOQ8x2O5_ZP9ATYIVMnqjFmQRpAf5usBsLr5C8eA",
+    "icon": "icons/mega.png"
   }
 ]
