@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Активация Windows через CMD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --text: #333;
+      --accent: #0078d4;
+      --code-bg: #eaeaea;
+      --box-bg: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1e1e1e;
+        --text: #ddd;
+        --accent: #4aa8ff;
+        --code-bg: #2a2a2a;
+        --box-bg: #2b2b2b;
+      }
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+      background: var(--box-bg);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      margin-top: 50px;
+    }
+    h1, h2 {
+      color: var(--accent);
+    }
+    pre {
+      background: var(--code-bg);
+      padding: 10px 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: monospace;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Активация Windows через Командную строку</h1>
+    <h2>1. Открой CMD от имени администратора</h2>
+    <p>Нажми <code>Win</code> → введи <code>cmd</code> → ПКМ → <strong>Запуск от имени администратора</strong></p>
+    <h2>2. Установи ключ Windows</h2>
+    <pre>slmgr /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</pre>
+    <p>Пример:</p>
+    <pre>slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX</pre>
+    <h2>3. Укажи KMS-сервер</h2>
+    <pre>slmgr /skms kms.digiboy.ir</pre>
+    <h2>4. Активируй Windows</h2>
+    <pre>slmgr /ato</pre>
+    <h2>5. Проверка активации</h2>
+    <pre>slmgr /xpr</pre>
+    <h2>📋 KMS ключи Windows</h2>
+    <ul>
+      <li>Windows 10 Pro: <code>W269N-WFGWX-YVC9B-4J6C9-T83GX</code></li>
+      <li>Windows 10 Home: <code>TX9XD-98N7V-6WMQ6-BX7FG-H8Q99</code></li>
+      <li>Windows 11 Pro: <code>W269N-WFGWX-YVC9B-4J6C9-T83GX</code></li>
+    </ul>
+    <p><strong>Важно:</strong> без рабочего KMS-сервера активация не пройдёт!</p>
+    <a class="back" href="index.html">← Назад к архиву</a>
+  </div>
+</body>
+</html>
