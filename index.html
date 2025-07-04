@@ -3,33 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <title>Мой Архив</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="icons/mega.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      color: #222;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    input, select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      max-width: 600px;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.01);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .card img {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #0078d4;
+      font-weight: bold;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+    .backlink {
+      text-align: center;
+      margin-top: 30px;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #1e1e1e;
+        color: #ddd;
+      }
+      .card {
+        background: #2b2b2b;
+        box-shadow: none;
+      }
+      input, select {
+        background: #1e1e1e;
+        color: #ddd;
+        border-color: #444;
+      }
+    }
+  </style>
 </head>
 <body>
   <h1>Мой Архив</h1>
+  <div class="controls">
+    <input type="text" id="search" placeholder="Поиск по названию...">
+    <select id="filter">
+      <option value="all">Все категории</option>
+    </select>
+  </div>
   <div id="file-list"></div>
-
   <audio id="click-sound" src="click.mp3" preload="auto"></audio>
-
+  <div class="backlink">
+    <a href="activation.html">→ Инструкция по активации Windows</a>
+  </div>
   <script>
     fetch('data.json')
       .then(res => res.json())
       .then(data => {
         const list = document.getElementById('file-list');
-        data.forEach(file => {
-          const div = document.createElement('div');
-          div.className = 'card';
-          div.innerHTML = `
-            <h3>${file.name}</h3>
-            <p>Размер: ${file.size}</p>
-            <p>
-              <img src="${file.icon}" width="20" style="vertical-align: middle; margin-right: 5px;">
-              ${file.host}
-            </p>
-            <a href="${file.url}" target="_blank" onclick="document.getElementById('click-sound').play()">Скачать</a>
-          `;
-          list.appendChild(div);
+        const filter = document.getElementById('filter');
+        const search = document.getElementById('search');
+        const types = [...new Set(data.map(f => f.type || 'Без категории'))];
+        types.forEach(type => {
+          const opt = document.createElement('option');
+          opt.value = type;
+          opt.textContent = type;
+          filter.appendChild(opt);
         });
+        function renderFiles() {
+          list.innerHTML = '';
+          const keyword = search.value.toLowerCase();
+          const selected = filter.value;
+          data.forEach(file => {
+            const name = file.name.toLowerCase();
+            const matchType = selected === 'all' || (file.type === selected);
+            const matchSearch = name.includes(keyword);
+            if (matchType && matchSearch) {
+              const div = document.createElement('div');
+              div.className = 'card';
+              div.innerHTML = `
+                <h3>${file.name}</h3>
+                <p>Размер: ${file.size}</p>
+                <p><img src="${file.icon}" width="20"> ${file.host}</p>
+                ${file.type ? `<p><strong>Категория:</strong> ${file.type}</p>` : ''}
+                <a href="${file.url}" target="_blank" onclick="document.getElementById('click-sound').play()">Скачать</a>
+              `;
+              list.appendChild(div);
+            }
+          });
+        }
+        search.addEventListener('input', renderFiles);
+        filter.addEventListener('change', renderFiles);
+        renderFiles();
       });
   </script>
 </body>
